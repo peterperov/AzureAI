@@ -57,6 +57,8 @@ class summarizer:
 
     def run_summarizer(self, file_name, out_file = ""):
 
+        chunking_result = self.split_chunks(file_name)
+
         cnt = 0
         for chunk in chunking_result.chunks:
             cnt += 1
@@ -100,8 +102,6 @@ class summarizer:
 sm = summarizer()
 
 starting_file = sys.argv[1]
-chunking_result = sm.split_chunks(starting_file)
-
-
-all_summary = ""
+out_file = sys.argv[2]
+chunking_result = sm.run_summarizer(starting_file)
 
