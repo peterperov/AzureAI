@@ -1,4 +1,3 @@
-
 import azure.cognitiveservices.speech as speechsdk
 import time
 import pickle
@@ -45,7 +44,7 @@ class subtitle_creator():
 # another way of handling stop handler is here:
 # https://github.com/Azure-Samples/cognitive-services-speech-sdk/blob/master/samples/python/console/speech_sample.py
 
-    def transcribe_text(self):
+    def transcribe_text(self, txt_output = ""):
         speech_recognizer = speechsdk.SpeechRecognizer(self.speech_config, self.audio_config)  
 
         # Flag to end transcription
@@ -69,11 +68,12 @@ class subtitle_creator():
             time.sleep(0.5)
 
         # Dump the whole transcription to a pickle file
-        with open(filename + ".transcribed_video.pickle", "wb") as f:
+        with open(self.filename + ".transcribed_video.pickle", "wb") as f:
             pickle.dump(self.results, f)
             print("Transcription dumped")
 
-        txt_output = filename + ".transcribed_video.txt"
+        if txt_output == "":
+            txt_output = self.filename + ".transcribed_video.txt"
 
         with open(txt_output, "w") as f:
             for line in self.results:
@@ -84,11 +84,11 @@ class subtitle_creator():
         return txt_output
 
 
+import sys
 
 
-# filename = "C:/Meetings/03DAI/FY24 Data & AI Landing Live Show - July 2023.mp4.audio_only.wav"
-
-filename = "C:/Videos/Database Migration to Azure SQL DREAM Demo.mp4.audio_only.wav"
+filename = sys.argv[1]
+output_file = sys.argv[2]
 sc = subtitle_creator(filename)
-output = sc.transcribe_text()
-print("TEXT transcribed: " + output)
+output_file = sc.transcribe_text(output_file)
+# print("TEXT transcribed: " + output)

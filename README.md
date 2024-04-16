@@ -11,3 +11,10 @@
         *  Speech2Text
     *  ChatGPT
     *  Copilots 
+
+
+## install 
+
+```
+pip install -r requirements.txt
+```

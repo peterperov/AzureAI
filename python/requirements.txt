@@ -1,0 +1,13 @@
+azure-functions
+tiktoken
+langchain==0.0.137
+openai
+azure-identity
+tenacity
+jsonschema
+azure-cognitiveservices-speech
+moviepy
+python-docx
+semantic-kernel
+
+
