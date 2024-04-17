@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             groupBox1 = new GroupBox();
+            cmdProcess = new Button();
+            textBox1 = new TextBox();
             button1 = new Button();
             webView = new Microsoft.Web.WebView2.WinForms.WebView2();
-            textBox1 = new TextBox();
-            cmdProcess = new Button();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)webView).BeginInit();
             SuspendLayout();
@@ -45,14 +45,30 @@
             groupBox1.Dock = DockStyle.Top;
             groupBox1.Location = new Point(0, 0);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1260, 200);
+            groupBox1.Size = new Size(1260, 113);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
+            // 
+            // cmdProcess
+            // 
+            cmdProcess.Location = new Point(602, 41);
+            cmdProcess.Name = "cmdProcess";
+            cmdProcess.Size = new Size(191, 46);
+            cmdProcess.TabIndex = 2;
+            cmdProcess.Text = "Process";
+            cmdProcess.UseVisualStyleBackColor = true;
+            cmdProcess.Click += cmdProcess_Click;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(12, 45);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(584, 39);
+            textBox1.TabIndex = 1;
             // 
             // button1
             // 
-            button1.Location = new Point(37, 50);
+            button1.Location = new Point(1057, 41);
             button1.Name = "button1";
             button1.Size = new Size(191, 46);
             button1.TabIndex = 0;
@@ -66,29 +82,12 @@
             webView.CreationProperties = null;
             webView.DefaultBackgroundColor = Color.White;
             webView.Dock = DockStyle.Fill;
-            webView.Location = new Point(0, 200);
+            webView.Location = new Point(0, 113);
             webView.Name = "webView";
-            webView.Size = new Size(1260, 895);
+            webView.Size = new Size(1260, 982);
             webView.Source = new Uri("https://www.microsoft.com/", UriKind.Absolute);
             webView.TabIndex = 1;
             webView.ZoomFactor = 1D;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(38, 126);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(584, 39);
-            textBox1.TabIndex = 1;
-            // 
-            // cmdProcess
-            // 
-            cmdProcess.Location = new Point(646, 122);
-            cmdProcess.Name = "cmdProcess";
-            cmdProcess.Size = new Size(191, 46);
-            cmdProcess.TabIndex = 2;
-            cmdProcess.Text = "Process";
-            cmdProcess.UseVisualStyleBackColor = true;
-            cmdProcess.Click += cmdProcess_Click;
             // 
             // Form1
             // 

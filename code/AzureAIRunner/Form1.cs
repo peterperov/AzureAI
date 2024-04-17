@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic.Devices;
 using System.Diagnostics;
 
 namespace AzureAIRunner
@@ -16,7 +17,10 @@ namespace AzureAIRunner
 
         private void button1_Click(object sender, EventArgs e)
         {
-            webView.CoreWebView2.Navigate("https://www.microsoft.com/");
+
+            string uri = "file:///W:/GITHUB/AzureAI/code/AzureAIRunner/start.html"; 
+            // webView.CoreWebView2.Navigate("https://www.microsoft.com/");
+            webView.CoreWebView2.Navigate(uri);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -26,7 +30,17 @@ namespace AzureAIRunner
 
         private void cmdProcess_Click(object sender, EventArgs e)
         {
-            RunPython(python_sample); 
+            RunPython(python_sample);
+
+            // 1. download file 
+            // 2.Extract audio
+            // 3.Trascribe audio
+            // 4.Chunk text
+            // a.Run summariser on text
+            // 5.Translate summariser
+            // Text2Speech summarised text in many languages
+
+
         }
 
 
