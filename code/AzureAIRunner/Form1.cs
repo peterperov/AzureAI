@@ -8,7 +8,11 @@ namespace AzureAIRunner
 
 
         string python_sample = @"W:\GITHUB\AzureAI\python\sample.py";
-        string PYTHON = @""; 
+        string PYTHON = @"";
+
+        AIWorker _worker = new AIWorker(); 
+
+
 
         public Form1()
         {
@@ -30,7 +34,7 @@ namespace AzureAIRunner
 
         private void cmdProcess_Click(object sender, EventArgs e)
         {
-            RunPython(python_sample);
+            //_worker.RunPython(python_sample);
 
             // 1. download file 
             // 2.Extract audio
@@ -41,45 +45,14 @@ namespace AzureAIRunner
             // Text2Speech summarised text in many languages
 
 
-        }
+            string fileName = "W:\\Recordings\\010\\Database Migration to Azure SQL DREAM Demo.mp4"; 
 
 
-        string python = "python.exe";
-
-
-        private void RunPython(string args)
-        {
-
-            // " c:\root\vcsi\vcsi.py ""{0}"" -o ""{1}""
-            // var args = string.Format(@" ""{0}"" ""{1}"" -o ""{2}"" -g 4x4",   AppSettings.VCSI, item.FullPath, thumbFile);
-
-            Console.WriteLine("{0} {1}", python, args);
-
-            var psi = new ProcessStartInfo()
-            {
-                FileName = python,
-                Arguments = args,
-                CreateNoWindow = false,
-                WindowStyle = ProcessWindowStyle.Normal,
-                // WindowStyle = ProcessWindowStyle.Hidden,
-                RedirectStandardOutput = true,
-                UseShellExecute = false
-            };
-
-             
-
-            var p = System.Diagnostics.Process.Start(psi);
-
-            p.WaitForExit();
-
-            var output = p.StandardOutput.ReadToEnd();
-
-            // Console.WriteLine(output);
-
-            Debug.WriteLine(output); 
+            _worker.ExtractAudio (fileName);
 
 
         }
+
 
 
     }
