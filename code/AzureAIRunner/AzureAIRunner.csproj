@@ -12,4 +12,9 @@
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2420.47" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\AzureAIRunner.Interfaces\AzureAIRunner.Interfaces.csproj" />
+    <ProjectReference Include="..\XsltWorks\XsltWorks.csproj" />
+  </ItemGroup>
+
 </Project>

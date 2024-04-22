@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="xslt\LandingPage.xslt" />
+    <None Remove="xslt\PagedView.xslt" />
+    <None Remove="xslt\pager.xslt" />
+    <None Remove="xslt\scripts.xslt" />
+    <None Remove="xslt\simple.xslt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="xslt\LandingPage.xslt" />
+    <EmbeddedResource Include="xslt\PagedView.xslt" />
+    <EmbeddedResource Include="xslt\pager.xslt" />
+    <EmbeddedResource Include="xslt\scripts.xslt" />
+    <EmbeddedResource Include="xslt\simple.xslt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\AzureAIRunner.Interfaces\AzureAIRunner.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

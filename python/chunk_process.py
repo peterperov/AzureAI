@@ -99,9 +99,8 @@ class summarizer:
 #prepare chunks
 
 
-sm = summarizer()
-
-starting_file = sys.argv[1]
-out_file = sys.argv[2]
-chunking_result = sm.run_summarizer(starting_file)
+# sm = summarizer()
+# starting_file = sys.argv[1]
+# out_file = sys.argv[2]
+# chunking_result = sm.run_summarizer(starting_file)
 

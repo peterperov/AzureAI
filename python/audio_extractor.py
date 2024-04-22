@@ -18,7 +18,6 @@ def extract_audio(filename, out_file = ""):
     audio.write_audiofile(out_file)
     return out_file
 
-filename = sys.argv[1]
-output_file = sys.argv[2]
-
-audio_file = extract_audio(filename, output_file)
+# filename = sys.argv[1]
+# output_file = sys.argv[2]
+# audio_file = extract_audio(filename, output_file)

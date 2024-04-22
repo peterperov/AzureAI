@@ -86,9 +86,8 @@ class subtitle_creator():
 
 import sys
 
-
-filename = sys.argv[1]
-output_file = sys.argv[2]
-sc = subtitle_creator(filename)
-output_file = sc.transcribe_text(output_file)
+# filename = sys.argv[1]
+# output_file = sys.argv[2]
+# sc = subtitle_creator(filename)
+# output_file = sc.transcribe_text(output_file)
 # print("TEXT transcribed: " + output)
