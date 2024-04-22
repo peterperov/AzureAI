@@ -102,21 +102,30 @@ namespace AzureAIRunner
                     FileName = file
                 }; 
 
-                if (Path.GetExtension(file) == ".txt")
+                var ext = Path.GetExtension(file);
+
+                switch (ext)
                 {
-                    item.Type = "text";
-                    item.Content = File.ReadAllText(file);
+                    case ".txt":
+                        item.Type = "text";
+                        item.Content = File.ReadAllText(file);
+                        break;
+                    case ".wav":
+                        item.Type = "audio";
+                        break;
+                    case ".mp4":
+                        item.Type = "video";
+                        break;
+                    case ".summary_all":
+                        item.Type = "summary_all";
+                        item.Content = File.ReadAllText(file);
+                        break;
+                    case ".mp3":
+                        item.Type = "summary_audio"; 
+                        break;
                 }
-                else if (Path.GetExtension(file) == ".wav")
-                {
-                    item.Type = "audio";
-                    
-                }
-                else if (Path.GetExtension(file) == ".mp4")
-                {
-                    item.Type = "video";
-                    
-                }
+
+
                 list.Add(item);
 
 

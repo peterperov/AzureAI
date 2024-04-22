@@ -26,30 +26,38 @@
 				file:///
 				<xsl:copy-of select="ArrayOfFileItem" />
 -->
-				<h1>Landing Page</h1>
+				<h1>Azure AI Services</h1>
 
 				<hr />
-
-				
-
+				<h2>Original Video</h2>
 				<hr />
-				<h2>Video</h2>
-				<hr />
-				
 				<xsl:apply-templates select="//FileItem[Type='video']" mode="video">
 				</xsl:apply-templates>
 				
 				<hr />
-				<h2>Audio</h2>
+				<h2>Extracted Audio</h2>
 				<hr />
 				<xsl:apply-templates select="//FileItem[Type='audio']" mode="audio">
 				</xsl:apply-templates>
 				
 				<hr />
-				<h2>Text</h2>
+				<h2>Azure Speech Recogniser - Extracted Text</h2>
 				<hr />
 				<xsl:apply-templates select="//FileItem[Type='text']" mode="text">
 				</xsl:apply-templates>
+				
+				<hr />
+				<h2>Azure OpenAI ChatGPT Service - Summarization</h2>
+				<hr />
+				<xsl:apply-templates select="//FileItem[Type='summary_all']" mode="text">
+				</xsl:apply-templates>
+				
+				<hr />
+				<h2>Azure Text to Speech - Summary Audio</h2>
+				<hr />
+				<xsl:apply-templates select="//FileItem[Type='summary_audio']" mode="audio">
+				</xsl:apply-templates>
+			
 			
 			</body>
 

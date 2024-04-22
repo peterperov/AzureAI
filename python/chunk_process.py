@@ -59,6 +59,7 @@ class summarizer:
 
         chunking_result = self.split_chunks(file_name)
 
+        all_summary = ""
         cnt = 0
         for chunk in chunking_result.chunks:
             cnt += 1
@@ -67,11 +68,11 @@ class summarizer:
             print("******************************************")
             # print(chunk.content)
 
-            chunkFile = file_name + ".chunk" + str(cnt) + ".txt"
+            chunkFile = file_name + ".chunk" + str(cnt)
             #write the chunk to a file
             write_file(chunkFile, chunk.content)
 
-            summaryFile = file_name + ".summary" + str(cnt) + ".txt"
+            summaryFile = file_name + ".summary" + str(cnt)
 
             context = self.kernel.create_new_context()
 
@@ -86,14 +87,15 @@ class summarizer:
             res = prompt()
             write_file(summaryFile, res.result)
 
-            all_summary += chunkFile + "\n\n" + res.result + "\n\n"
+            # all_summary += chunkFile + "\n\n" + res.result + "\n\n"
+            all_summary += res.result + "\n\n"
 
         if out_file == "":
-            out_file = file_name + ".summary_all.txt" 
+            out_file = file_name + ".summary_all" 
 
         write_file(out_file, all_summary)  
 
-        return ""
+        return out_file
 
 
 #prepare chunks
