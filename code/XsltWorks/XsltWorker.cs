@@ -183,6 +183,18 @@ namespace XsltWorks
             return fileName;
         }
 
+        public string RenderXslt(XmlDocument dom, 
+                string xsltResource = "XsltWorks.xslt.pager.xslt", 
+                string fileName = null)
+        {
+
+            XslCompiledTransform xslt = GetXslt(xsltResource);
+
+            var filename = RenderXslt(dom, xslt, fileName); 
+
+            return filename; 
+        }
+
 
         public string RenderXslt<T>(List<T> list,
                 string xsltResource = "XsltWorks.xslt.pager.xslt",

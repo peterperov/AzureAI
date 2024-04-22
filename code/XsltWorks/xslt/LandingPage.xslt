@@ -12,6 +12,21 @@
 			<head>
 				<title>Process Report</title>
 				<meta charset="UTF-8"/>
+				<style>
+					BODY
+					{
+					FONT-FAMILY: Calibri;
+					}
+					td
+					{
+					margin: 2px;
+					padding: 2px;
+					}
+					.gray
+					{
+					background-color: #e8e8e8;
+					}
+				</style>				
 				<script>
 					function btnClickAction(name)
 					{
@@ -37,9 +52,10 @@
 				<hr />
 				<h2>Extracted Audio</h2>
 				<hr />
+				<table>
 				<xsl:apply-templates select="//FileItem[Type='audio']" mode="audio">
 				</xsl:apply-templates>
-				
+				</table>
 				<hr />
 				<h2>Azure Speech Recogniser - Extracted Text</h2>
 				<hr />
@@ -55,9 +71,16 @@
 				<hr />
 				<h2>Azure Text to Speech - Summary Audio</h2>
 				<hr />
+				<table>
+				
 				<xsl:apply-templates select="//FileItem[Type='summary_audio']" mode="audio">
 				</xsl:apply-templates>
-			
+				</table>
+
+				<hr />
+				<textarea readonly="true">
+					<xsl:copy-of select="."/>	
+				</textarea>
 			
 			</body>
 
@@ -75,19 +98,27 @@
 			<xsl:value-of select="Content"/>
 		</textarea>
 	
+		<br />
 	</xsl:template>
 
 	<xsl:template match="FileItem" mode="audio">
-		<b><xsl:value-of select="Name"/></b>
-		<br />
-		<audio controls="true">
-			<source type="audio/wav">
-				<xsl:attribute name="src">
-					file:///<xsl:value-of select="FileName/text()"/>
-				</xsl:attribute>
-			</source> 
-		</audio>		
-	
+
+		<tr>
+			<td>
+				<audio controls="true">
+					<source type="audio/wav">
+						<xsl:attribute name="src">
+							file:///<xsl:value-of select="FileName/text()"/>
+						</xsl:attribute>
+					</source> 
+				</audio>		
+			</td>			
+			<td>
+				<b><xsl:value-of select="Name"/></b>
+			</td>
+
+		</tr>
+		
 	</xsl:template>
 
 	<xsl:template match="FileItem" mode="video">
@@ -100,7 +131,8 @@
 					file:///<xsl:value-of select="FileName/text()"/>
 				</xsl:attribute>
 			</source> 
-		</video>			
+		</video>
+		<br />
 	
 	</xsl:template>	
 

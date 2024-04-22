@@ -10,6 +10,9 @@ moviepy
 python-docx
 semantic-kernel
 pytube
+azure-ai-translation-document==1.0.0
+azure-ai-translation-text
+
 
 
 

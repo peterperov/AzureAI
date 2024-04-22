@@ -77,16 +77,48 @@ namespace AzureAIRunner
 
             var list = GetFiles(folderPath);
 
-            XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<xml />");
+            XmlDocument xmlDocument = SerializeEverything(folderPath);
+            
             
 
-            var filename = xw.RenderXslt(list, "XsltWorks.xslt.LandingPage.xslt");
+            var filename = xw.RenderXslt(xmlDocument, "XsltWorks.xslt.LandingPage.xslt");
             
 
             Debug.WriteLine(filename);
 
             NavigateTo(filename);
+        }
+
+        private XmlDocument SerializeEverything(string folder)
+        {
+
+            XmlDocument dom = new XmlDocument();
+            dom.LoadXml("<xml />"); 
+
+            var list = GetFiles(folder);
+            var serializer = new XMLSerializer();
+            var str = serializer.SerializeToString(list);
+
+            var filesNode = dom.CreateNode(XmlNodeType.Element, "Files", "");
+            filesNode.InnerXml = str;
+            dom.DocumentElement.AppendChild(filesNode);
+
+            // append all xml files in the thing
+
+            var files = Directory.GetFiles(folder, "*.xml"); 
+            foreach ( var file in files)
+            {
+                if (!File.Exists(file)) continue;
+
+                var dom1 = new XmlDocument();
+                dom1.Load(file);
+                var newNode = dom.ImportNode(dom1.DocumentElement, true); 
+                dom.DocumentElement.AppendChild(newNode);
+
+
+            }
+
+            return dom; 
         }
 
         private List<FileItem> GetFiles(string folder)

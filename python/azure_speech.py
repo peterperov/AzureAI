@@ -97,3 +97,15 @@ class azure_speech:
             print("Speech synthesis canceled; error details: {}".format(result.error_details))
 
         return all_voices
+    
+
+    def available_voices_to_xml(self, text="en-US"):
+        all_voices = self.speech_synthesis_get_available_voices(text)
+        out_xml = f'<voices language="{text}">\n'
+        for v in all_voices:
+            out_xml = out_xml + f'\t<voice locale="{v.locale}" short_name="{v.short_name}" name="{v.name}" />\n'
+            # print( f'{v.locale} \t {v.short_name} \t {v.name}')
+        
+        out_xml += "</voices>\n"
+
+        return out_xml

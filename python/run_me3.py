@@ -1,6 +1,6 @@
 
 from azure_speech import *
-
+from utils import *
 
 # run azure ai voice to read summarization
 worker = azure_speech()
@@ -23,5 +23,8 @@ list = worker.speech_synthesis_get_available_voices(language)
 for v in list:
     print( f'{v.locale} \t {v.short_name} \t {v.name}')
     
+
+out_xml = worker.available_voices_to_xml(language)
+write_file( folder + language + '.xml', out_xml )
 
 worker.speech_synthesis_from_file_to_mp3(input_file = file_name, output_file=output_file, voice_name = voice_name, language = language )
