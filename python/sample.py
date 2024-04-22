@@ -19,3 +19,8 @@ input_file = folder + "Meet AI demands at any scale with purpose-built infrastru
 input_text = read_all( input_file)
 
 print( input_text )
+
+
+input_text = read_all_utf(input_file)
+
+print(input_text)

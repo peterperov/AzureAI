@@ -25,7 +25,7 @@ class azure_speech:
         print("IMPORTED FUNCTION")
 
     def speech_synthesis_from_file_to_mp3(self, input_file, output_file, voice_name = "AvaNeural", language = "en-US"):
-        input_text = read_all( input_file)
+        input_text = read_all_utf( input_file)
         self.speech_synthesis_to_mp3_file(text = input_text, file_name = output_file, voice_name = voice_name, language = language)
 
 

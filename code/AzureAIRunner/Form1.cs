@@ -152,6 +152,12 @@ namespace AzureAIRunner
                         item.Type = "summary_all";
                         item.Content = File.ReadAllText(file);
                         break;
+                    case ".translatedsummary":
+                        item.Type = "translated_summary"; 
+                        item.Content = File.ReadAllText(file);
+                        item.Language = item.Name.Substring(item.Name.LastIndexOf("."));
+
+                        break;
                     case ".mp3":
                         item.Type = "summary_audio"; 
                         break;

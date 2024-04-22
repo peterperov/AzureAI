@@ -26,7 +26,7 @@
 					{
 					background-color: #e8e8e8;
 					}
-				</style>				
+				</style>
 				<script>
 					function btnClickAction(name)
 					{
@@ -48,56 +48,63 @@
 				<hr />
 				<xsl:apply-templates select="//FileItem[Type='video']" mode="video">
 				</xsl:apply-templates>
-				
+
 				<hr />
 				<h2>Extracted Audio</h2>
 				<hr />
 				<table>
-				<xsl:apply-templates select="//FileItem[Type='audio']" mode="audio">
-				</xsl:apply-templates>
+					<xsl:apply-templates select="//FileItem[Type='audio']" mode="audio">
+					</xsl:apply-templates>
 				</table>
 				<hr />
-				<h2>Azure Speech Recogniser - Extracted Text</h2>
+				<h2>Azure Speech Recogniser - Speech to Text Recognition</h2>
 				<hr />
 				<xsl:apply-templates select="//FileItem[Type='text']" mode="text">
 				</xsl:apply-templates>
-				
+
 				<hr />
 				<h2>Azure OpenAI ChatGPT Service - Summarization</h2>
 				<hr />
 				<xsl:apply-templates select="//FileItem[Type='summary_all']" mode="text">
 				</xsl:apply-templates>
+
+				<hr />
+				<h2>Azure Translator Service - Summary translated</h2>
+				<hr />
+				<xsl:apply-templates select="//FileItem[Type='translated_summary']" mode="text">
+				</xsl:apply-templates>		
 				
 				<hr />
 				<h2>Azure Text to Speech - Summary Audio</h2>
 				<hr />
 				<table>
-				
-				<xsl:apply-templates select="//FileItem[Type='summary_audio']" mode="audio">
-				</xsl:apply-templates>
+					<xsl:apply-templates select="//FileItem[Type='summary_audio']" mode="audio">
+					</xsl:apply-templates>
 				</table>
 
 				<hr />
 				<textarea readonly="true">
-					<xsl:copy-of select="."/>	
+					<xsl:copy-of select="."/>
 				</textarea>
-			
+
 			</body>
 
 		</html>
 
 	</xsl:template>
 
-	
+
 	<xsl:template match="FileItem" mode="text">
-		<b><xsl:value-of select="Name"/></b>
+		<b>
+			<xsl:value-of select="Name"/>
+		</b>
 		<br />
-		
+
 		<textarea rows="10" cols="50">
-			
+
 			<xsl:value-of select="Content"/>
 		</textarea>
-	
+
 		<br />
 	</xsl:template>
 
@@ -110,31 +117,37 @@
 						<xsl:attribute name="src">
 							file:///<xsl:value-of select="FileName/text()"/>
 						</xsl:attribute>
-					</source> 
-				</audio>		
-			</td>			
+					</source>
+				</audio>
+			</td>
 			<td>
-				<b><xsl:value-of select="Name"/></b>
+				<b>
+					<xsl:value-of select="Name"/>
+				</b>
 			</td>
 
 		</tr>
-		
+
 	</xsl:template>
 
 	<xsl:template match="FileItem" mode="video">
-		<b><xsl:value-of select="Name"/></b>
-		<br />		
+		<b>
+			<xsl:value-of select="Name"/>
+		</b>
+		<br />
 		<xsl:value-of select="FileName"/>
 		<video controls="true" width="600">
 			<source type="audio/wav">
 				<xsl:attribute name="src">
 					file:///<xsl:value-of select="FileName/text()"/>
 				</xsl:attribute>
-			</source> 
+			</source>
 		</video>
 		<br />
-	
-	</xsl:template>	
+
+	</xsl:template>
 
 
 </xsl:stylesheet>
+
+

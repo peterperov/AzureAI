@@ -26,6 +26,19 @@ class azure_translation:
 
 # client = DocumentTranslationClient(endpoint, AzureKeyCredential(speech_key))
 
+    def get_languages_xml(self):
+        kvp = self.get_languages(self)
+
+        xml = "<translation_languages>\n"
+
+        for key, value in kvp:
+            xml += f'\t<language key="{key}" name="{value.name}" />\n'
+            # print(f"{key} -- name: {value.name} ({value.native_name})")        
+
+        xml += "</translation_languages>"
+        return xml
+
+
     def get_languages(self):
         try:
             response = self.text_translator.get_languages()
@@ -39,6 +52,8 @@ class azure_translation:
                 for key, value in response.translation.items():
                     print(f"{key} -- name: {value.name} ({value.native_name})")
 
+            return response.translation.items()
+
             if response.transliteration is not None:
                 print("Transliteration Languages:")
                 for key, value in response.transliteration.items():
@@ -48,6 +63,8 @@ class azure_translation:
                 print("Dictionary Languages:")
                 for key, value in response.dictionary.items():
                     print(f"{key} -- name: {value.name}, supported target languages count: {len(value.translations)}")
+
+            
 
         except HttpResponseError as exception:
             print(f"Error Code: {exception.error.code}")
@@ -67,6 +84,10 @@ class azure_translation:
             if translation:
                 for translated_text in translation.translations:
                     print(f"Text was translated to: '{translated_text.to}' and the result is: '{translated_text.text}'.")
+                    
+                    return translated_text.text
+
+                    
 
         except HttpResponseError as exception:
             print(f"Error Code: {exception.error.code}")

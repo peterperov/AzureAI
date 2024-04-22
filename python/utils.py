@@ -6,9 +6,20 @@ def read_all(filepath):
         text = f.read()
     return text 
 
+def read_all_utf(filepath):
+    with open(filepath, 'r', encoding="utf-8") as f:
+        text = f.read()
+    return text 
+
 def write_file(filepath, text):
     with open(filepath, 'w') as f:
         f.write(text)
+
+def write_file_utf(filepath, text):
+    with open(filepath, 'w', encoding="utf-8") as f:
+        f.write(text)
+
+
 
 def readtxt(filename):
     doc = docx.Document(filename)
