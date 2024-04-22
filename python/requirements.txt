@@ -9,5 +9,7 @@ azure-cognitiveservices-speech
 moviepy
 python-docx
 semantic-kernel
+pytube
+
 
 
