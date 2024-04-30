@@ -26,6 +26,19 @@ namespace AzureAIRunner
         }
 
 
+        public void DownloadYoutube(string url, string workFolder)
+        {
+            // 
+            var step1 = "net_step1.py";
+
+            string args = string.Format("\"{0}\" \"{1}\" \"{2}\"",
+                Path.Combine(PythonFolder, step1), url, workFolder);
+
+            RunPython(args);
+
+        }
+
+
         public void ExtractAudio(string fileName)
         {
             string args = string.Format("\"{0}\" \"{1}\"", 

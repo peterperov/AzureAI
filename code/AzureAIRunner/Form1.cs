@@ -43,9 +43,21 @@ namespace AzureAIRunner
             _tempFolder = Path.GetTempPath(); 
         }
 
+
+        string _location = "W:\\GITHUB\\AzureAI\\downloaded\\"; 
+
         private void cmdProcess_Click(object sender, EventArgs e)
         {
+
+            // folder first
+            var workFolder = GetNewLocation();
+            txtFolder.Text = workFolder;
+
             //_worker.RunPython(python_sample);
+            var url = txtUrl.Text;
+
+            _worker.DownloadYoutube(url, workFolder); 
+
 
             // 1. download file 
             // 2.Extract audio
@@ -56,12 +68,28 @@ namespace AzureAIRunner
             // Text2Speech summarised text in many languages
 
 
-            string fileName = "W:\\Recordings\\010\\Database Migration to Azure SQL DREAM Demo.mp4";
+            // string fileName = "W:\\Recordings\\010\\Database Migration to Azure SQL DREAM Demo.mp4";
+            // _worker.ExtractAudio(fileName);
 
 
-            _worker.ExtractAudio(fileName);
+        }
 
+        private string GetNewLocation()
+        {
 
+            int i = 1;
+
+            var newFolder = Path.Combine(_location, string.Format("{0:0000}", i) ); 
+
+            while (Directory.Exists(newFolder))
+            {
+                i++;
+                newFolder = Path.Combine(_location, string.Format("{0:0000}", i));
+            }
+
+            Directory.CreateDirectory(newFolder);
+
+            return newFolder; 
         }
 
         private List<XsltPager> _pager;
@@ -73,13 +101,12 @@ namespace AzureAIRunner
             XsltWorker xw = new XsltWorker();
             // _pager = xw.RenderXsltPaged(_list, "XsltWorks.xslt.PagedView.xslt", pageSize: 100);
 
-            var folderPath = "W:\\GITHUB\\AzureAI\\downloaded\\0002"; 
+            // var folderPath = "W:\\GITHUB\\AzureAI\\downloaded\\0002"; 
+            var folderPath = txtFolder.Text;
 
             var list = GetFiles(folderPath);
 
             XmlDocument xmlDocument = SerializeEverything(folderPath);
-            
-            
 
             var filename = xw.RenderXslt(xmlDocument, "XsltWorks.xslt.LandingPage.xslt");
             
