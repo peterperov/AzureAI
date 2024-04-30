@@ -3,8 +3,11 @@
     xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl"
 >
 
+	<xsl:import href="scripts.xslt"/>	
+	
 	<xsl:output method = "html" encoding="UTF-8" />
 	<xsl:param name="arg1"/>
+	
 
 	<xsl:template match="/">
 
@@ -32,7 +35,15 @@
 					{
 					window.chrome.webview.postMessage(name);
 					}
+				
+					function btnClickTranslate()
+					{
+						
+						window.chrome.webview.postMessage("translateto " + document.getElementById("seltranslate").value);
+					}
+				
 				</script>
+				<xsl:call-template name="script" />
 			</head>
 			<body>
 				<!--
@@ -50,42 +61,84 @@
 				</xsl:apply-templates>
 
 				<hr />
-				<h2>Extracted Audio</h2>
+				<a href="#" onclick="HideElement('extractedaudio');return false;">
+					<h2>Extracted Audio</h2>
+				</a>
+				<div id="extractedaudio" style="display:none">
+					<hr />
+					<table>
+						<xsl:apply-templates select="//FileItem[Type='audio']" mode="audio">
+						</xsl:apply-templates>
+					</table>
+				</div>
 				<hr />
-				<table>
-					<xsl:apply-templates select="//FileItem[Type='audio']" mode="audio">
-					</xsl:apply-templates>
-				</table>
-				<hr />
-				<h2>Azure Speech Recogniser - Speech to Text Recognition</h2>
+				
+				<a href="#" onclick="HideElement('speech2text');return false;">
+					<h2>Azure Speech Recogniser - Speech to Text Recognition</h2> 
+				</a>
+				<div id="speech2text" style="display:none">
 				<hr />
 				<xsl:apply-templates select="//FileItem[Type='text']" mode="text">
 				</xsl:apply-templates>
+				</div>
+					
+				<hr />
+				<a href="#" onclick="HideElement('summarization');return false;">
+					<h2>Azure OpenAI ChatGPT Service - Summary</h2>
+				</a>
+				<div id="summarization" style="display:none">
+					<hr />
+					<xsl:apply-templates select="//FileItem[Type='summary_all']" mode="text">
+					</xsl:apply-templates>
+				</div>
 
-				<hr />
-				<h2>Azure OpenAI ChatGPT Service - Summarization</h2>
-				<hr />
-				<xsl:apply-templates select="//FileItem[Type='summary_all']" mode="text">
-				</xsl:apply-templates>
-
-				<hr />
-				<h2>Azure Translator Service - Summary translated</h2>
-				<hr />
-				<xsl:apply-templates select="//FileItem[Type='translated_summary']" mode="text">
-				</xsl:apply-templates>		
 				
 				<hr />
-				<h2>Azure Text to Speech - Summary Audio</h2>
-				<hr />
-				<table>
-					<xsl:apply-templates select="//FileItem[Type='summary_audio']" mode="audio">
+				<!-- *******************************************************************
+				translation 
+				 style="display:none"
+				******************************************************************* -->
+				<a href="#" onclick="HideElement('translation');return false;">
+					<h2>Azure Translator Service - Summary translated</h2>
+				</a>
+				<div id="translation">
+					<hr />
+
+					<span>
+						<b>Add Translation: </b>
+						<select id="seltranslate">
+							<xsl:apply-templates select="//translation_languages/language" mode="languagepicker" />
+						</select>
+						<input type="button" onclick="btnClickTranslate();return false" value="translate"/>
+					</span>
+					<br />
+					
+					
+					<xsl:apply-templates select="//FileItem[Type='translated_summary']" mode="translatedtext">
 					</xsl:apply-templates>
-				</table>
+				</div>
+				
+				<hr />
+				<a href="#" onclick="HideElement('summaryaudio');return false;">
+					<h2>Azure Text to Speech - Summary Audio</h2>
+				</a>
+				<div id="summaryaudio" style="display:none">
+					<hr />
+					<table>
+						<xsl:apply-templates select="//FileItem[Type='summary_audio']" mode="audio">
+						</xsl:apply-templates>
+					</table>
+				</div>
 
 				<hr />
-				<textarea readonly="true">
-					<xsl:copy-of select="."/>
-				</textarea>
+				<br />
+				
+				<a href="#" onclick="HideElement('debuginfo');return false;">debug</a>
+				<div id="debuginfo" style="display:none">
+					<textarea readonly="true">
+						<xsl:copy-of select="."/>
+					</textarea>
+				</div>
 
 			</body>
 
@@ -94,16 +147,36 @@
 	</xsl:template>
 
 
+	<xsl:template match="FileItem" mode="translatedtext">
+		
+		<xsl:variable name="id">translatedtext<xsl:value-of select="position()"/></xsl:variable>
+		<br />
+		<a href="#" onclick="HideElement('{$id}');return false;"> <b><xsl:value-of select="LanguageName"/></b> </a>
+		<br />
+		<div id="{$id}" style="display:none">
+		<br />
+		<textarea rows="10" cols="50">
+			<xsl:value-of select="Content"/>
+		</textarea>
+		</div>
+
+	</xsl:template>
+	
+	
 	<xsl:template match="FileItem" mode="text">
-		<b>
-			<xsl:value-of select="Name"/>
-		</b>
+		
+		<xsl:variable name="id">text<xsl:value-of select="position()"/></xsl:variable>
+
+		<br />
+		<b><xsl:value-of select="Name"/></b>
+		<br />
+		<div id="{$id}">
 		<br />
 
 		<textarea rows="10" cols="50">
-
 			<xsl:value-of select="Content"/>
 		</textarea>
+		</div>
 
 		<br />
 	</xsl:template>
@@ -135,7 +208,9 @@
 			<xsl:value-of select="Name"/>
 		</b>
 		<br />
+<!--
 		<xsl:value-of select="FileName"/>
+-->
 		<video controls="true" width="600">
 			<source type="audio/wav">
 				<xsl:attribute name="src">
@@ -145,6 +220,20 @@
 		</video>
 		<br />
 
+	</xsl:template>
+
+	
+	<xsl:template match="language" mode="languagepicker">
+
+		<option>
+			<xsl:attribute name="value">
+				<xsl:value-of select="@key" />
+			</xsl:attribute>
+			<xsl:value-of select="@name" />
+		</option>
+			
+
+	
 	</xsl:template>
 
 

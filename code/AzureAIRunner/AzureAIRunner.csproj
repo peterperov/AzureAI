@@ -17,4 +17,10 @@
     <ProjectReference Include="..\XsltWorks\XsltWorks.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="translation_languages.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

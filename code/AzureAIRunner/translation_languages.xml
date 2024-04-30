@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<translation_languages>
+	<language key="af" name="Afrikaans" />
+	<language key="am" name="Amharic" />
+	<language key="ar" name="Arabic" />
+	<language key="as" name="Assamese" />
+	<language key="az" name="Azerbaijani" />
+	<language key="ba" name="Bashkir" />
+	<language key="bg" name="Bulgarian" />
+	<language key="bho" name="Bhojpuri" />
+	<language key="bn" name="Bangla" />
+	<language key="bo" name="Tibetan" />
+	<language key="brx" name="Bodo" />
+	<language key="bs" name="Bosnian" />
+	<language key="ca" name="Catalan" />
+	<language key="cs" name="Czech" />
+	<language key="cy" name="Welsh" />
+	<language key="da" name="Danish" />
+	<language key="de" name="German" />
+	<language key="doi" name="Dogri" />
+	<language key="dsb" name="Lower Sorbian" />
+	<language key="dv" name="Divehi" />
+	<language key="el" name="Greek" />
+	<language key="en" name="English" />
+	<language key="es" name="Spanish" />
+	<language key="et" name="Estonian" />
+	<language key="eu" name="Basque" />
+	<language key="fa" name="Persian" />
+	<language key="fi" name="Finnish" />
+	<language key="fil" name="Filipino" />
+	<language key="fj" name="Fijian" />
+	<language key="fo" name="Faroese" />
+	<language key="fr" name="French" />
+	<language key="fr-CA" name="French (Canada)" />
+	<language key="ga" name="Irish" />
+	<language key="gl" name="Galician" />
+	<language key="gom" name="Konkani" />
+	<language key="gu" name="Gujarati" />
+	<language key="ha" name="Hausa" />
+	<language key="he" name="Hebrew" />
+	<language key="hi" name="Hindi" />
+	<language key="hne" name="Chhattisgarhi" />
+	<language key="hr" name="Croatian" />
+	<language key="hsb" name="Upper Sorbian" />
+	<language key="ht" name="Haitian Creole" />
+	<language key="hu" name="Hungarian" />
+	<language key="hy" name="Armenian" />
+	<language key="id" name="Indonesian" />
+	<language key="ig" name="Igbo" />
+	<language key="ikt" name="Inuinnaqtun" />
+	<language key="is" name="Icelandic" />
+	<language key="it" name="Italian" />
+	<language key="iu" name="Inuktitut" />
+	<language key="iu-Latn" name="Inuktitut (Latin)" />
+	<language key="ja" name="Japanese" />
+	<language key="ka" name="Georgian" />
+	<language key="kk" name="Kazakh" />
+	<language key="km" name="Khmer" />
+	<language key="kmr" name="Kurdish (Northern)" />
+	<language key="kn" name="Kannada" />
+	<language key="ko" name="Korean" />
+	<language key="ks" name="Kashmiri" />
+	<language key="ku" name="Kurdish (Central)" />
+	<language key="ky" name="Kyrgyz" />
+	<language key="ln" name="Lingala" />
+	<language key="lo" name="Lao" />
+	<language key="lt" name="Lithuanian" />
+	<language key="lug" name="Ganda" />
+	<language key="lv" name="Latvian" />
+	<language key="lzh" name="Chinese (Literary)" />
+	<language key="mai" name="Maithili" />
+	<language key="mg" name="Malagasy" />
+	<language key="mi" name="Māori" />
+	<language key="mk" name="Macedonian" />
+	<language key="ml" name="Malayalam" />
+	<language key="mn-Cyrl" name="Mongolian (Cyrillic)" />
+	<language key="mn-Mong" name="Mongolian (Traditional)" />
+	<language key="mni" name="Manipuri" />
+	<language key="mr" name="Marathi" />
+	<language key="ms" name="Malay" />
+	<language key="mt" name="Maltese" />
+	<language key="mww" name="Hmong Daw" />
+	<language key="my" name="Myanmar (Burmese)" />
+	<language key="nb" name="Norwegian" />
+	<language key="ne" name="Nepali" />
+	<language key="nl" name="Dutch" />
+	<language key="nso" name="Sesotho sa Leboa" />
+	<language key="nya" name="Nyanja" />
+	<language key="or" name="Odia" />
+	<language key="otq" name="Querétaro Otomi" />
+	<language key="pa" name="Punjabi" />
+	<language key="pl" name="Polish" />
+	<language key="prs" name="Dari" />
+	<language key="ps" name="Pashto" />
+	<language key="pt" name="Portuguese (Brazil)" />
+	<language key="pt-PT" name="Portuguese (Portugal)" />
+	<language key="ro" name="Romanian" />
+	<language key="ru" name="Russian" />
+	<language key="run" name="Rundi" />
+	<language key="rw" name="Kinyarwanda" />
+	<language key="sd" name="Sindhi" />
+	<language key="si" name="Sinhala" />
+	<language key="sk" name="Slovak" />
+	<language key="sl" name="Slovenian" />
+	<language key="sm" name="Samoan" />
+	<language key="sn" name="Shona" />
+	<language key="so" name="Somali" />
+	<language key="sq" name="Albanian" />
+	<language key="sr-Cyrl" name="Serbian (Cyrillic)" />
+	<language key="sr-Latn" name="Serbian (Latin)" />
+	<language key="st" name="Sesotho" />
+	<language key="sv" name="Swedish" />
+	<language key="sw" name="Swahili" />
+	<language key="ta" name="Tamil" />
+	<language key="te" name="Telugu" />
+	<language key="th" name="Thai" />
+	<language key="ti" name="Tigrinya" />
+	<language key="tk" name="Turkmen" />
+	<language key="tlh-Latn" name="Klingon (Latin)" />
+	<language key="tlh-Piqd" name="Klingon (pIqaD)" />
+	<language key="tn" name="Setswana" />
+	<language key="to" name="Tongan" />
+	<language key="tr" name="Turkish" />
+	<language key="tt" name="Tatar" />
+	<language key="ty" name="Tahitian" />
+	<language key="ug" name="Uyghur" />
+	<language key="uk" name="Ukrainian" />
+	<language key="ur" name="Urdu" />
+	<language key="uz" name="Uzbek (Latin)" />
+	<language key="vi" name="Vietnamese" />
+	<language key="xh" name="Xhosa" />
+	<language key="yo" name="Yoruba" />
+	<language key="yua" name="Yucatec Maya" />
+	<language key="yue" name="Cantonese (Traditional)" />
+	<language key="zh-Hans" name="Chinese Simplified" />
+	<language key="zh-Hant" name="Chinese Traditional" />
+	<language key="zu" name="Zulu" />
+</translation_languages>

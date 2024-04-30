@@ -16,7 +16,7 @@ class azure_speech:
     def __init__(self):
         self = self
 
-        self.config = dotenv_values(".env")
+        self.config = dotenv_values("W:/GITHUB/AzureAI/.env")
         self.speech_key = self.config.get("AZURE_SPEECH_API_KEY", None)
         self.service_region = self.config.get("AZURE_SPEECH_REGION", None)
 

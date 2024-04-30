@@ -14,7 +14,7 @@ class subtitle_creator():
         self = self
         self.filename = filename
 
-        self.config = dotenv_values(".env")
+        self.config = dotenv_values("W:/GITHUB/AzureAI/.env")
         self.speech_api_key = self.config.get("AZURE_SPEECH_API_KEY", None)
         self.speech_region = self.config.get("AZURE_SPEECH_REGION", None)
 

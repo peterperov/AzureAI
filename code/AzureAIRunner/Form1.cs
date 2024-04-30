@@ -1,5 +1,6 @@
 using AzureAIRunner.Interfaces;
 using Microsoft.VisualBasic.Devices;
+using Microsoft.Web.WebView2.Core;
 using System.Diagnostics;
 using System.Xml;
 using XsltWorks;
@@ -41,6 +42,8 @@ namespace AzureAIRunner
         private void InitUI()
         {
             _tempFolder = Path.GetTempPath(); 
+
+            webView.CoreWebView2InitializationCompleted += webView_CoreWebView2InitializationCompleted;
         }
 
 
@@ -89,6 +92,8 @@ namespace AzureAIRunner
 
             Directory.CreateDirectory(newFolder);
 
+            // if (!newFolder.EndsWith(@"\")) newFolder += @"\";
+
             return newFolder; 
         }
 
@@ -109,7 +114,6 @@ namespace AzureAIRunner
             XmlDocument xmlDocument = SerializeEverything(folderPath);
 
             var filename = xw.RenderXslt(xmlDocument, "XsltWorks.xslt.LandingPage.xslt");
-            
 
             Debug.WriteLine(filename);
 
@@ -141,9 +145,16 @@ namespace AzureAIRunner
                 dom1.Load(file);
                 var newNode = dom.ImportNode(dom1.DocumentElement, true); 
                 dom.DocumentElement.AppendChild(newNode);
-
-
             }
+
+
+            var appFolder = Path.GetDirectoryName(Application.ExecutablePath); 
+            // append languages 
+            var languagesXml = new XmlDocument();
+            languagesXml.Load(Path.Combine(appFolder, "translation_languages.xml")); 
+            var langNode = dom.ImportNode(languagesXml.DocumentElement, true);
+            dom.DocumentElement.AppendChild(langNode); 
+
 
             return dom; 
         }
@@ -176,13 +187,15 @@ namespace AzureAIRunner
                         item.Type = "video";
                         break;
                     case ".summary_all":
+                    case ".summaryall":
                         item.Type = "summary_all";
                         item.Content = File.ReadAllText(file);
                         break;
                     case ".translatedsummary":
                         item.Type = "translated_summary"; 
                         item.Content = File.ReadAllText(file);
-                        item.Language = item.Name.Substring(item.Name.LastIndexOf("."));
+                        item.Language = item.Name.Substring(item.Name.LastIndexOf(".") + 1);
+                        item.LanguageName = TranslatorLanguages.GetLanguageFromCode(item.Language);
 
                         break;
                     case ".mp3":
@@ -202,10 +215,46 @@ namespace AzureAIRunner
 
         }
 
+        public void TranslateAndNavigate(string lang)
+        {
+
+        }
+
 
         public void NavigateTo(string fileName)
         {
             webView.CoreWebView2.Navigate(fileName);
+        }
+
+
+
+        private void webView_CoreWebView2InitializationCompleted(object sender, Microsoft.Web.WebView2.Core.CoreWebView2InitializationCompletedEventArgs e)
+        {
+            //subscribe to CoreWebView2 events (add event handlers)
+            webView.CoreWebView2.WebMessageReceived += CoreWebView2_WebMessageReceived;
+        }
+
+
+        private void CoreWebView2_WebMessageReceived(object sender, CoreWebView2WebMessageReceivedEventArgs e)
+        {
+            Debug.WriteLine("Info: MSG (JSON): " + e.WebMessageAsJson);
+            Debug.WriteLine("Info: MSG (String): " + e.TryGetWebMessageAsString());
+
+            string str = e.TryGetWebMessageAsString();
+            string arg;
+            if (str.StartsWith("seltranslate "))
+            {
+                arg = str.Replace("seltranslate ", "");
+                // SelectAndNavigate(arg);
+                TranslateAndNavigate(arg); 
+            }
+            else if (str.StartsWith("page "))
+            {
+                arg = str.Replace("page ", "");
+                // _lastPageID = arg;
+
+            }
+
         }
 
     }

@@ -22,5 +22,7 @@ namespace AzureAIRunner.Interfaces
 
         public string Language { get; set; }
 
+        public string LanguageName { get; set; }
+
     }
 }

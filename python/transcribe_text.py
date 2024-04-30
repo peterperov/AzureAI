@@ -6,7 +6,7 @@ from dotenv import dotenv_values
 
 class subtitle_creator():
 
-    config = dotenv_values(".env")
+    config = dotenv_values("W:/GITHUB/AzureAI/.env")
     speech_api_key = config.get("AZURE_SPEECH_API_KEY", None)
     speech_region = config.get("AZURE_SPEECH_REGION", None)
     results = list()

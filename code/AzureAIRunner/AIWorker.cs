@@ -61,6 +61,8 @@ namespace AzureAIRunner
 
             Console.WriteLine("{0} {1}", python, args);
 
+            var buffer = new StringBuilder();
+
             var psi = new ProcessStartInfo()
             {
                 FileName = python,
@@ -68,21 +70,31 @@ namespace AzureAIRunner
                 CreateNoWindow = false,
                 WindowStyle = ProcessWindowStyle.Normal,
                 // WindowStyle = ProcessWindowStyle.Hidden,
-                RedirectStandardOutput = true,
+                RedirectStandardOutput = false,
+                RedirectStandardError = true,
                 UseShellExecute = false
             };
+
+            // p = new Process(psi); 
 
 
 
             var p = System.Diagnostics.Process.Start(psi);
+            // hookup the eventhandlers to capture the data that is received
+            // p.OutputDataReceived += (sender, args) => buffer.AppendLine(args.Data);
+            p.ErrorDataReceived += (sender, args) => buffer.AppendLine(args.Data);
+
+            // start our event pumps
+            // p.BeginOutputReadLine();
+            p.BeginErrorReadLine();
 
             p.WaitForExit();
 
-            var output = p.StandardOutput.ReadToEnd();
+            // var output = p.StandardOutput.ReadToEnd();
 
             // Console.WriteLine(output);
 
-            Debug.WriteLine(output);
+            Debug.WriteLine(buffer.ToString());
 
 
         }

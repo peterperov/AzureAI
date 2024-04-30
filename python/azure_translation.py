@@ -17,7 +17,7 @@ class azure_translation:
     def __init__(self):
         self = self
 
-        self.config = dotenv_values(".env")
+        self.config = dotenv_values("W:/GITHUB/AzureAI/.env")
         self.region = self.config.get("AZURE_TRANSLATOR_REGION", None)
         self.endpoint = self.config.get("AZURE_TRANSLATOR_TEXT_ENDPOINT", None)
         self.speech_key = self.config.get("AZURE_TRANSLATOR_API_KEY", None)
@@ -27,7 +27,7 @@ class azure_translation:
 # client = DocumentTranslationClient(endpoint, AzureKeyCredential(speech_key))
 
     def get_languages_xml(self):
-        kvp = self.get_languages(self)
+        kvp = self.get_languages()
 
         xml = "<translation_languages>\n"
 
