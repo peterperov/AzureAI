@@ -24,5 +24,8 @@ namespace AzureAIRunner.Interfaces
 
         public string LanguageName { get; set; }
 
+        public string VoiceName { get; set; }
+
+
     }
 }

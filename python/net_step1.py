@@ -46,8 +46,10 @@ def run_steps(video_file, output_path):
     subtitle_file = sc.transcribe_text()
     print("TEXT transcribed: " + subtitle_file)
 
+    print("****************************")
+    print ("Generate summary  ")
+    print("****************************")
     summary_file = subtitle_file + ".summaryall"
-
     sm = summarizer()
     summary_out_file = sm.run_summarizer(subtitle_file, out_file = summary_file)
 
@@ -55,10 +57,10 @@ def run_steps(video_file, output_path):
 
 
 
-yt_video = "https://www.youtube.com/watch?v=tsaZM9ipnRw"
-out_path = "W:/GITHUB/AzureAI/downloaded/0004"
+# yt_video = "https://www.youtube.com/watch?v=tsaZM9ipnRw"
+# out_path = "W:/GITHUB/AzureAI/downloaded/0004"
 
-# out_path = sys.argv[2]
-# yt_video = sys.argv[1]
+out_path = sys.argv[2]
+yt_video = sys.argv[1]
 
 run_steps(yt_video, out_path)

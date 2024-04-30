@@ -103,20 +103,17 @@ namespace AzureAIRunner
 
         private void cmdDisplay_Click(object sender, EventArgs e)
         {
-            XsltWorker xw = new XsltWorker();
-            // _pager = xw.RenderXsltPaged(_list, "XsltWorks.xslt.PagedView.xslt", pageSize: 100);
-
             // var folderPath = "W:\\GITHUB\\AzureAI\\downloaded\\0002"; 
             var folderPath = txtFolder.Text;
+            SerializeAndNavigate(folderPath);
+        }
 
-            var list = GetFiles(folderPath);
-
+        public void SerializeAndNavigate(string folderPath)
+        {
+            XsltWorker xw = new XsltWorker();
             XmlDocument xmlDocument = SerializeEverything(folderPath);
-
             var filename = xw.RenderXslt(xmlDocument, "XsltWorks.xslt.LandingPage.xslt");
-
             Debug.WriteLine(filename);
-
             NavigateTo(filename);
         }
 
@@ -199,25 +196,48 @@ namespace AzureAIRunner
 
                         break;
                     case ".mp3":
+                        // el-GR-AthinaNeural.summary.mp3
+
+                        // parse language 
+                        string shortname = (item.Name.EndsWith(".summary") ? item.Name.Remove(item.Name.Length - 8) : item.Name); 
+                        var items = shortname.Split('-');
+
+                        item.Language = items[0];
+                        item.LanguageName = TranslatorLanguages.GetLanguageFromCode(item.Language);
+                        item.VoiceName = shortname;
+
                         item.Type = "summary_audio"; 
                         break;
                 }
-
-
                 list.Add(item);
-
-
             }
-
-
             return list; 
-
-
         }
 
         public void TranslateAndNavigate(string lang)
         {
+            string folderPath = txtFolder.Text;
 
+            _worker.AddTranslation(folderPath, lang); 
+
+            // add translation
+            SerializeAndNavigate(folderPath);
+        }
+
+        public void VoiceAndNavigate(string voice)
+        {
+            string folderPath = txtFolder.Text;
+
+            // da-DK-JeppeNeural
+
+            // check if translation exists
+            // *.el.translatedsummary
+
+            // add voice 
+            _worker.AddVoice(folderPath, voice);
+
+            // add translation
+            SerializeAndNavigate(folderPath);
         }
 
 
@@ -242,16 +262,17 @@ namespace AzureAIRunner
 
             string str = e.TryGetWebMessageAsString();
             string arg;
-            if (str.StartsWith("seltranslate "))
+            if (str.StartsWith("translateto "))
             {
-                arg = str.Replace("seltranslate ", "");
+                arg = str.Replace("translateto ", "");
                 // SelectAndNavigate(arg);
                 TranslateAndNavigate(arg); 
             }
-            else if (str.StartsWith("page "))
+            else if (str.StartsWith("voicewith "))
             {
-                arg = str.Replace("page ", "");
+                arg = str.Replace("voicewith ", "");
                 // _lastPageID = arg;
+                VoiceAndNavigate(arg); 
 
             }
 
