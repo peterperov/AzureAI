@@ -62,16 +62,14 @@
 
 				<form  name="form1" id="form1">
 				<h1>Azure AI Services</h1>
-
 				<hr />
-				<h2>Original Video</h2>
-				<hr />
+					
 				<xsl:apply-templates select="//FileItem[Type='video']" mode="video">
 				</xsl:apply-templates>
 
 				<hr />
 				<a href="#" onclick="HideElement('extractedaudio');return false;">
-					<h3>Extracted Audio</h3>
+					<h4>Extracted Audio</h4>
 				</a>
 				<div id="extractedaudio" style="display:none">
 					<hr />
@@ -83,7 +81,7 @@
 				<hr />
 				
 				<a href="#" onclick="HideElement('speech2text');return false;">
-					<h3>Azure Speech Recogniser - Speech to Text Recognition</h3> 
+					<h4>Azure Speech Recogniser - Speech to Text Recognition</h4> 
 				</a>
 				<div id="speech2text" style="display:none">
 				<hr />
@@ -171,7 +169,7 @@
 				</xsl:call-template>
 				<!-- 
 				DEBUG
-				-->
+				
 				
 				<a href="#" onclick="HideElement('debuginfo');return false;">debug</a>
 				<div id="debuginfo" style="display:none">
@@ -179,6 +177,8 @@
 						<xsl:copy-of select="."/>
 					</textarea>
 				</div>
+				
+				-->
 
 			</body>
 
@@ -222,7 +222,6 @@
 	</xsl:template>
 
 	<xsl:template match="FileItem" mode="audio">
-
 		<tr>
 			<td>
 				<xsl:value-of select="LanguageName"/>
@@ -244,9 +243,9 @@
 	</xsl:template>
 
 	<xsl:template match="FileItem" mode="video">
-		<b>
-			<xsl:value-of select="Name"/>
-		</b>
+		<!--
+		<b><xsl:value-of select="Name"/></b>
+		-->
 		<br />
 <!--
 		<xsl:value-of select="FileName"/>
