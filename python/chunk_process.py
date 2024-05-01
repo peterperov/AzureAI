@@ -11,6 +11,8 @@ from EmbeddingGenerator.embedder import text_embedder
 import semantic_kernel as sk
 from semantic_kernel.connectors.ai.open_ai import OpenAITextCompletion, AzureTextCompletion
 
+from dotenv import dotenv_values
+
 # local utils and shortcuts
 from utils import *
 
@@ -27,12 +29,13 @@ class summarizer:
 
         # init kernel
         self.kernel = sk.Kernel()
-        deployment, api_key, endpoint = sk.azure_openai_settings_from_dot_env()
-        self.kernel.add_text_completion_service("dv", AzureTextCompletion(deployment, endpoint, api_key))
+        # deployment, api_key, endpoint = sk.azure_openai_settings_from_dot_env()
+        self.config = dotenv_values("W:/GITHUB/AzureAI/.env")
+        self.deployment = self.config.get("AZURE_OPENAI_DEPLOYMENT_NAME", None)
+        self.api_key = self.config.get("AZURE_OPENAI_API_KEY", None)
+        self.endpoint = self.config.get("AZURE_OPENAI_ENDPOINT", None)
 
-        self.deployment = deployment
-        self.api_key = api_key
-        self.endpoint = endpoint
+        self.kernel.add_text_completion_service("dv", AzureTextCompletion(self.deployment, self.endpoint, self.api_key))
 
 
     def split_chunks(self, filepath):
