@@ -35,7 +35,7 @@ class summarizer:
         self.api_key = self.config.get("AZURE_OPENAI_API_KEY", None)
         self.endpoint = self.config.get("AZURE_OPENAI_ENDPOINT", None)
 
-        self.kernel.add_text_completion_service("dv", AzureTextCompletion(self.deployment, self.endpoint, self.api_key))
+        self.kernel.add_text_completion_service("dv", AzureTextCompletion(deployment_name=self.deployment, endpoint=self.endpoint, api_key=self.api_key))
 
 
     def split_chunks(self, filepath):
@@ -69,7 +69,7 @@ class summarizer:
             print("******************************************")
             print("chunk " + str(cnt))
             print("******************************************")
-            # print(chunk.content)
+            print(chunk.content)
 
             chunkFile = file_name + ".chunk" + str(cnt)
             #write the chunk to a file
@@ -88,6 +88,7 @@ class summarizer:
             # answer = await kernel.run_on_vars_async(context, prompt)
             
             res = prompt()
+            print("prompt result: " + res.result )
             write_file(summaryFile, res.result)
 
             # all_summary += chunkFile + "\n\n" + res.result + "\n\n"

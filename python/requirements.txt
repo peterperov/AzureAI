@@ -8,7 +8,7 @@ jsonschema
 azure-cognitiveservices-speech
 moviepy
 python-docx
-semantic-kernel
+semantic-kernel==0.3.8.dev0
 pytube
 azure-ai-translation-document==1.0.0
 azure-ai-translation-text
